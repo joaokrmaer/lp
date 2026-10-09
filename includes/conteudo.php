@@ -22,8 +22,8 @@ $diferenciais = [
 ];
 
 $palestrantes = [
-    ['nome' => 'MSc. Daniel Zannin',                   'tema' => 'Parada de origem cardiogênica',                                      'foto' => 'zannin.jpg'],
-    ['nome' => 'M.V. Djalmo Pietruka',                 'tema' => 'POCUS direcionado ao cardiopata e VExUS',                            'foto' => 'djalmo.jpg'],
+    ['nome' => 'M.V. Caio Cavalcanti Balençuela',      'tema' => 'Coração e fragilidade: cardiopatias no envelhecimento animal',       'foto' => 'caio.jpg'],
+    ['nome' => 'M.V. Djalmo Pietruka',                 'tema' => 'POCUS no cardiopata e monitorização hemodinâmica na UTI','foto' => 'djalmo.jpg'],
     ['nome' => 'M.V. Renan Matheus Duarte',            'tema' => 'Ventilação mecânica e vasoativos no choque',                         'foto' => 'renan.jpg'],
     ['nome' => 'Dra. Flavia Mazzo',                    'tema' => 'Arritmias na internação e seu tratamento',                           'foto' => 'flavia.jpg'],
     ['nome' => 'Dra. Mayara Travalini',                'tema' => 'Anestesia no paciente cardiopata',                                   'foto' => 'mayara.jpg'],
@@ -38,10 +38,16 @@ $fotos_palestrantes = array_column($palestrantes, 'foto', 'nome');
 // Currículo por palestrante, exibido no modal do card. Quem ainda não mandou o
 // texto fica de fora e o card não abre.
 $curriculos = [
-    'MSc. Daniel Zannin' => [
-        'Mestre em Anestesiologia Veterinária pela UFPR',
-        'Residência em Anestesiologia Veterinária na PUCPR',
-        'Pós-graduado em bloqueios locorregionais no IEP Ranvier, em São Paulo',
+    'M.V. Caio Cavalcanti Balençuela' => [
+        'Médico Veterinário, Graduação Sanduíche',
+        'Residência em Clínica Médica de Cães e Gatos pela Universidade de São Paulo (FMVZ/USP)',
+        'Doutorando com ênfase em envelhecimento e fragilidade geriátrica pela Universidade de São Paulo (FMVZ/USP)',
+        'Especialização lato sensu em Geriatria Veterinária',
+        'Pós graduando em Dor e Cuidados Paliativos',
+        'Professor Universitário da disciplina de Clínica Médica',
+        'Estágio internacional no Serviço de Medicina Interna das Universidades Autônoma de Barcelona e Cardenal Herrera Valencia, na Espanha.',
+        'Membro da Sociedade Brasileira de Geriatria Veterinária (SBGV)',
+        'Atendimento especializado em Geriatria Veterinária em hospitais de referência em São Paulo.',
     ],
     'Dr. Alessandro Martins' => [
         'Residência em Anestesiologia Veterinária na UNESP de Jaboticabal',
@@ -138,30 +144,31 @@ function iniciais(string $nome): string
 
 $programacao = [
     '10 de outubro de 2026' => [
-        ['08h30 às 09h00', 'Abertura', ''],
-        ['09h00 às 10h00', 'Nutrição no paciente cardiopata na internação', 'Dra. Ticiane Giselle Bitencourt'],
-        ['10h00 às 11h00', 'Uso de vasoativos no choque cardiogênico', 'M.V. Renan Matheus Duarte'],
+        ['08h30 às 09h00', 'Abertura e recepção do simpósio presencial + online', ''],
+        ['09h00 às 10h00', 'Nutrição no paciente cardiopata durante a internação', 'Dra. Ticiane Giselle Bitencourt'],
+        ['10h00 às 11h00', 'Anestesia e sedação no paciente cardiopata: o que precisamos saber na emergência?', 'Dra. Mayara Travalini'],
         ['11h00 às 11h30', 'Intervalo', ''],
-        ['11h30 às 12h30', 'POCUS direcionado ao cardiopata', 'M.V. Djalmo Pietruka'],
-        ['12h30 às 13h00', 'Abordagem inicial do edema pulmonar cardiogênico no pronto socorro', 'M.V. Jennif da Rocha Esposito'],
-        ['13h00 às 14h30', 'Intervalo com almoço, prática demonstrativa de POCUS', 'M.V. Renan Matheus Duarte e M.V. Djalmo Pietruka'],
+        ['11h30 às 12h30', 'POCUS direcionado ao paciente cardiopata', 'M.V. Djalmo Pietruka'],
+        ['12h30 às 13h00', 'Abordagem inicial do edema pulmonar cardiogênico no pronto-socorro', 'M.V. Jennif da Rocha Esposito'],
+        ['13h00 às 14h30', 'Intervalo com demonstração prática de POCUS (tópicos anestésicos aplicados)', 'M.V. Djalmo Pietruka e Dra. Mayara Travalini'],
         ['14h30 às 15h30', 'Da oxigenoterapia à ventilação mecânica', 'MSc. Adalberto Monteiro'],
-        ['15h30 às 16h30', 'Desmame da ventilação mecânica pós edema cardiogênico', 'M.V. Renan Matheus Duarte'],
+        ['15h30 às 16h30', 'Desmame da ventilação mecânica após edema pulmonar cardiogênico', 'M.V. Renan Matheus Duarte'],
         ['16h30 às 17h00', 'Intervalo', ''],
-        ['17h00 às 18h00', 'Monitoração hemodinâmica no paciente em edema cardiogênico no leito da UTI', 'M.V. Djalmo Pietruka'],
-        ['18h00 às 19h00', 'Anestesia no paciente cardiopata e para procedimentos intervencionistas em cirurgias cardíacas', 'Dra. Mayara Travalini'],
-        ['19h00 às 20h00', 'Principais arritmias na internação e seu tratamento', 'Dra. Flavia Mazzo'],
-        ['20h00 às 01h00', 'Coquetel', ''],
+        ['17h00 às 18h00', 'Monitorização hemodinâmica do paciente com edema pulmonar cardiogênico na UTI', 'M.V. Djalmo Pietruka'],
+        ['18h00 às 19h00', 'Anestesia nas cardiopatias congênitas e adquiridas para procedimentos cirúrgicos e intervencionistas', 'Dra. Mayara Travalini'],
+        ['19h00 às 20h00', 'Principais arritmias durante a internação e suas abordagens terapêuticas', 'Dra. Flavia Mazzo'],
+        ['20h00 às 01h00', 'Coquetel de confraternização', ''],
     ],
     '11 de outubro de 2026' => [
-        ['09h00 às 10h00', 'Manejo do felino com cardiopatia hipertrófica na anestesia', 'Dra. Mayara Travalini'],
-        ['10h00 às 11h00', 'Anticoagulação: o que temos de evidência em cardiopatas?', 'MSc. Adalberto Monteiro'],
-        ['11h00 às 12h30', 'Parada de origem cardiogênica: o que fazer?', 'MSc. Daniel Zannin'],
-        ['12h30 às 14h00', 'Intervalo com almoço, demonstrativo VExUS', 'M.V. Djalmo Pietruka'],
-        ['14h00 às 15h00', 'Principais cardiopatias em cães e gatos e sua classificação', 'Prof. Dr. Marlos Sousa'],
-        ['15h00 às 16h00', 'Guia terapêutico do B2 ao D', 'Prof. Dr. Marlos Sousa'],
-        ['16h00 às 17h00', 'Principais cardiopatias congênitas e seu tratamento', 'Prof. Dr. Marlos Sousa'],
-        ['17h00 às 18h00', 'Intervencionismo cardiológico', 'Prof. Dr. Marlos Sousa'],
+        ['09h00 às 10h00', 'Uso de fármacos vasoativos no choque cardiogênico', 'M.V. Renan Matheus Duarte'],
+        ['10h00 às 11h00', 'Anticoagulação em pacientes cardiopatas: o que dizem as evidências?', 'MSc. Adalberto Monteiro'],
+        ['11h00 às 12h00', 'Coração e fragilidade: o impacto das cardiopatias no envelhecimento animal', 'M.V. Caio Cavalcanti Balençuela'],
+        ['12h00 às 14h00', 'Intervalo com demonstração prática de ecocardiografia e POCUS (abordagem anestésica aplicada ao cardiopata)', 'M.V. Djalmo Pietruka e Dra. Mayara Travalini'],
+        ['14h00 às 15h00', 'Principais cardiopatias em cães e gatos: diagnóstico e classificação', 'Prof. Dr. Marlos Sousa'],
+        ['15h00 às 16h00', 'Guia terapêutico das cardiopatias: do estágio B2 ao D', 'Prof. Dr. Marlos Sousa'],
+        ['16h00 às 17h00', 'Principais cardiopatias congênitas e suas abordagens terapêuticas', 'Prof. Dr. Marlos Sousa'],
+        ['17h00 às 18h00', 'Intervencionismo cardiológico: indicações e possibilidades terapêuticas', 'Prof. Dr. Marlos Sousa'],
+        ['18h00 às 18h10', 'Encerramento e divulgação dos eventos de 2026 e 2027', ''],
     ],
 ];
 
