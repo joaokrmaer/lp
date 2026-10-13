@@ -3,7 +3,6 @@ require __DIR__ . '/includes/dados.php';
 require __DIR__ . '/includes/conteudo.php';
 
 $lote = LOTE_VIGENTE;
-$outro_lote = $lote === '1' ? '2' : '1';
 
 // Dentro do sistema da faculdade a página é uma view do CodeIgniter e usa o cabeçalho
 // institucional; solta no Apache, usa o cabeçalho próprio desta pasta. Se o controller
@@ -31,7 +30,7 @@ require __DIR__ . ($no_sistema ? '/includes/header-sistema.php' : '/includes/hea
                 <?php endforeach; ?>
             </ul>
             <div class="bts">
-                <a class="bt bt-claro" href="#investimento">Garantir minha vaga</a>
+                <a class="bt bt-claro" href="#investimento">Garantir meu acesso</a>
                 <a class="bt bt-linha" href="#programacao">Ver programação</a>
             </div>
         </div>
@@ -51,6 +50,27 @@ require __DIR__ . ($no_sistema ? '/includes/header-sistema.php' : '/includes/hea
         <?php endforeach; ?>
     </dl>
 </div>
+
+<?php if ($fotos_evento): ?>
+<section class="secao cinza" id="como-foi">
+    <div class="lp-container">
+        <span class="chapeu">Edição 2026</span>
+        <h2 class="titulo-secao">Como foi o nosso <span>simpósio</span></h2>
+
+        <div class="carrossel js-carrossel">
+            <div class="trilho js-trilho">
+                <?php foreach ($fotos_evento as $i => $foto): ?>
+                    <figure class="slide">
+                        <img src="<?= $lp ?>/assets/img/evento/<?= rawurlencode($foto) ?>" alt="Simpósio Plantonista Veterinário UFAPE, foto <?= $i + 1 ?>" loading="lazy">
+                    </figure>
+                <?php endforeach; ?>
+            </div>
+            <button type="button" class="seta anterior js-anterior" aria-label="Foto anterior">&lsaquo;</button>
+            <button type="button" class="seta proxima js-proxima" aria-label="Próxima foto">&rsaquo;</button>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
 
 <section class="secao">
     <div class="lp-container">
@@ -104,10 +124,9 @@ require __DIR__ . ($no_sistema ? '/includes/header-sistema.php' : '/includes/hea
 
 <section class="secao" id="investimento">
     <div class="lp-container">
-        <h2 class="titulo-secao">Escolha a sua <span>modalidade</span></h2>
+        <h2 class="titulo-secao">Assista ao <span>simpósio gravado</span></h2>
         <p class="intro">
-            Valores do <?= $lote === '1' ? 'primeiro' : 'segundo' ?> lote. Pagamento via Pix, boleto à vista
-            ou cartão em até 3x sem juros (4 a 10x com juros).
+            Pagamento via Pix, boleto à vista ou cartão em até 3x sem juros (4 a 10x com juros).
         </p>
 
         <div class="grade-precos">
@@ -129,15 +148,12 @@ require __DIR__ . ($no_sistema ? '/includes/header-sistema.php' : '/includes/hea
                                 <?php else: ?>
                                     <p class="preco">
                                         <b><?= formatar_brl(valor_cheio($id, $lote)) ?></b>
-                                        <?php if ($lote === '1'): ?>
-                                            <s>2º lote <?= formatar_brl(valor_cheio($id, $outro_lote)) ?></s>
-                                        <?php endif; ?>
                                     </p>
                                 <?php endif; ?>
                             </div>
                         <?php endforeach; ?>
                     </div>
-                    <button type="button" class="bt js-abrir-popup" data-modalidade="<?= $id ?>">Quero esta modalidade</button>
+                    <button type="button" class="bt js-abrir-popup" data-modalidade="<?= $id ?>">Quero assistir</button>
                 </article>
             <?php endforeach; ?>
         </div>

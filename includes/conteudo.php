@@ -35,6 +35,15 @@ $palestrantes = [
 
 $fotos_palestrantes = array_column($palestrantes, 'foto', 'nome');
 
+// Fotos do carrossel "como foi": basta soltar os arquivos em assets/img/evento/, a
+// ordem segue o nome do arquivo. Pasta vazia esconde a seção.
+$pasta_evento = __DIR__ . '/../assets/img/evento';
+$fotos_evento = is_dir($pasta_evento)
+    ? preg_grep('/\.(jpe?g|png|webp)$/i', scandir($pasta_evento))
+    : [];
+natsort($fotos_evento);
+$fotos_evento = array_values($fotos_evento);
+
 // Currículo por palestrante, exibido no modal do card. Quem ainda não mandou o
 // texto fica de fora e o card não abre.
 $curriculos = [
@@ -177,7 +186,6 @@ $inclusos = [
     'Certificado UFAPE conforme modalidade',
     'Acesso à gravação por 12 meses',
     'Materiais complementares (apostila)',
-    'Coquetel para modalidade presencial',
 ];
 
 $faq = [

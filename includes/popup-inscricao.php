@@ -3,8 +3,8 @@
     <div class="caixa">
         <div class="topo">
             <div>
-                <h2 id="popup-titulo">Garantir minha vaga</h2>
-                <p>Modalidade: <strong class="js-modalidade"></strong></p>
+                <h2 id="popup-titulo">Garantir meu acesso</h2>
+                <p>Acesso: <strong class="js-modalidade"></strong></p>
             </div>
             <button type="button" class="fechar js-fechar" aria-label="Fechar">&times;</button>
         </div>
@@ -30,7 +30,7 @@
 
             <div class="rodape-popup">
                 <div class="total">
-                    <span class="rotulo-total">Total (<?= $lote ?>º lote)</span>
+                    <span class="rotulo-total">Total</span>
                     <div class="numero js-total"></div>
                 </div>
                 <button type="button" class="bt bt-azul js-enviar" disabled>Ir para o checkout</button>

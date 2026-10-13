@@ -41,23 +41,10 @@ $categorias = [
 // produto próprio de ex-aluno (68630 presencial, 68631 com gravação); se um dia a
 // inscrição voltar a passar por eles, é acrescentar 'pos' => '<id>' aqui. O 68633,
 // que este comentário dava como ex-aluno online, hoje é o workshop do NeuroVet.
+//
+// O evento presencial já aconteceu: as modalidades presencial (68619) e presencial
+// com gravação (68620) saíram e a venda segue só com o acesso online gravado.
 $modalidades = [
-    'presencial' => [
-        'titulo'      => 'Presencial',
-        'nota'        => 'Inclui doação de brinquedo.',
-        'checkout_id' => ['geral' => '68619'],
-        'precos'      => [
-            'geral'  => ['1' => 26000, '2' => 31200],
-        ],
-    ],
-    'presencial_gravacao' => [
-        'titulo'      => 'Presencial + gravação (12 meses)',
-        'nota'        => 'Inclui doação de brinquedo. Em caso de não comparecimento, será cobrada taxa de R$ 25 referente ao brinquedo.',
-        'checkout_id' => ['geral' => '68620'],
-        'precos'      => [
-            'geral'  => ['1' => 47000, '2' => 56400],
-        ],
-    ],
     'online' => [
         'titulo'      => 'Online transmitido e gravado',
         'nota'        => 'Acesso por 12 meses.',

@@ -299,6 +299,78 @@ html {
     color: var(--cinza);
 }
 
+/* Como foi: carrossel de fotos do evento ------------------------------------ */
+
+.carrossel {
+    position: relative;
+}
+
+.carrossel .trilho {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.carrossel .trilho::-webkit-scrollbar {
+    display: none;
+}
+
+.carrossel .slide {
+    flex: 0 0 calc((100% - 40px) / 3);
+    margin: 0;
+    aspect-ratio: 3 / 2;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: var(--linha);
+    scroll-snap-align: start;
+}
+
+.carrossel .slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* fotos em pé perdem topo e base no recorte: puxa para cima, onde ficam os rostos */
+    object-position: center 30%;
+}
+
+.carrossel .seta {
+    position: absolute;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    padding: 0 0 4px 0;
+    border: 0;
+    border-radius: 50%;
+    font-size: 32px;
+    line-height: 1;
+    color: var(--azul-escuro);
+    background-color: #fff;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .15);
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: .2s;
+}
+
+.carrossel .seta:hover {
+    color: #fff;
+    background-color: var(--azul);
+}
+
+.carrossel .anterior {
+    left: -23px;
+}
+
+.carrossel .proxima {
+    right: -23px;
+}
+
 /* Para quem é --------------------------------------------------------------- */
 
 .publico-alvo {
@@ -424,7 +496,9 @@ html {
 
 .grade-precos {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    /* só a modalidade online segue à venda: um card, centralizado */
+    grid-template-columns: minmax(0, 360px);
+    justify-content: center;
     gap: 20px;
     align-items: stretch;
 }
@@ -931,6 +1005,10 @@ html {
 /* Responsivo ---------------------------------------------------------------- */
 
 @media (max-width: 991px) {
+    .carrossel .slide {
+        flex-basis: calc((100% - 20px) / 2);
+    }
+
     .hero .lp-container,
     .publico-alvo,
     .grade-precos {
@@ -965,6 +1043,15 @@ html {
 }
 
 @media (max-width: 767px) {
+    /* no celular o dedo arrasta e a próxima foto aparece cortada na borda */
+    .carrossel .slide {
+        flex-basis: 85%;
+    }
+
+    .carrossel .seta {
+        display: none;
+    }
+
     .lp-container {
         padding: 0 20px;
     }
