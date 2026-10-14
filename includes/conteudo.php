@@ -1,13 +1,13 @@
 <?php
-// Textos da página: programação, corpo docente e dúvidas frequentes.
+// Textos da página: programação e corpo docente.
 
-$selos = ['Presencial', 'Online ao vivo', 'Gravado por 12 meses', 'Certificado UFAPE'];
+$selos = ['Online ao vivo','Gravado por 12 meses', 'Certificado UFAPE'];
 
 $numeros = [
     'Data'              => '10 e 11 de outubro de 2026',
     'Local'             => 'Av. Tiradentes, 960, São Paulo/SP',
     'Carga horária'     => '16 horas de programação',
-    'Vagas presenciais' => 'Limitadas a 260 pessoas',
+    'Vagas'             => 'Limitadas a 260 pessoas',
 ];
 
 $diferenciais = [
@@ -35,14 +35,22 @@ $palestrantes = [
 
 $fotos_palestrantes = array_column($palestrantes, 'foto', 'nome');
 
-// Fotos do carrossel "como foi": basta soltar os arquivos em assets/img/evento/, a
-// ordem segue o nome do arquivo. Pasta vazia esconde a seção.
+// Seção "como foi": basta soltar os arquivos em assets/img/evento/, a ordem segue o
+// nome do arquivo. Fotos vão para o carrossel; o primeiro vídeo .mp4 fica ao lado
+// dele, com a capa <nome>.capa.jpg, que por isso não entra como foto. Pasta vazia
+// esconde a seção.
 $pasta_evento = __DIR__ . '/../assets/img/evento';
-$fotos_evento = is_dir($pasta_evento)
-    ? preg_grep('/\.(jpe?g|png|webp)$/i', scandir($pasta_evento))
-    : [];
-natsort($fotos_evento);
-$fotos_evento = array_values($fotos_evento);
+$arquivos_evento = is_dir($pasta_evento) ? scandir($pasta_evento) : [];
+natsort($arquivos_evento);
+$fotos_evento = array_values(preg_grep('/(?<!\.capa)\.(jpe?g|png|webp)$/i', $arquivos_evento));
+$videos_evento = array_values(preg_grep('/\.mp4$/i', $arquivos_evento));
+
+function capa_do_video(string $video): string
+{
+    $capa = preg_replace('/\.mp4$/i', '.capa.jpg', $video);
+
+    return is_file(__DIR__ . '/../assets/img/evento/' . $capa) ? $capa : '';
+}
 
 // Currículo por palestrante, exibido no modal do card. Quem ainda não mandou o
 // texto fica de fora e o card não abre.
@@ -186,13 +194,4 @@ $inclusos = [
     'Certificado UFAPE conforme modalidade',
     'Acesso à gravação por 12 meses',
     'Materiais complementares (apostila)',
-];
-
-$faq = [
-    ['O evento será presencial ou online?', 'O simpósio terá formato híbrido, com opção presencial e opção online transmitida e gravada.'],
-    ['O acesso online fica disponível por quanto tempo?', 'Na modalidade online transmitida e gravada, o acesso ficará disponível por 12 meses.'],
-    ['O presencial tem limite de vagas?', 'Sim. O número máximo presencial é de 260 pessoas.'],
-    ['Há valor diferente para ex-alunos UFAPE?', 'Sim. Alunos e ex-alunos da pós-graduação UFAPE têm valores próprios; os demais participantes seguem a tabela geral.'],
-    ['A inscrição presencial exige doação?', 'Sim. Nas categorias presenciais informadas, há doação de brinquedo vinculada à inscrição.'],
-    ['Quais são as formas de pagamento?', 'Pix, boleto à vista e cartão: 3x sem juros e de 4 a 10x com juros. As regras de cancelamento, transferência e reembolso seguem a política institucional da UFAPE.'],
 ];

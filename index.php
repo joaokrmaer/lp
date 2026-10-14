@@ -51,22 +51,47 @@ require __DIR__ . ($no_sistema ? '/includes/header-sistema.php' : '/includes/hea
     </dl>
 </div>
 
-<?php if ($fotos_evento): ?>
+<?php if ($fotos_evento || $videos_evento): ?>
 <section class="secao cinza" id="como-foi">
     <div class="lp-container">
         <span class="chapeu">Edição 2026</span>
         <h2 class="titulo-secao">Como foi o nosso <span>simpósio</span></h2>
 
-        <div class="carrossel js-carrossel">
-            <div class="trilho js-trilho">
-                <?php foreach ($fotos_evento as $i => $foto): ?>
-                    <figure class="slide">
-                        <img src="<?= $lp ?>/assets/img/evento/<?= rawurlencode($foto) ?>" alt="Simpósio Plantonista Veterinário UFAPE, foto <?= $i + 1 ?>" loading="lazy">
-                    </figure>
-                <?php endforeach; ?>
+        <?php $video = $videos_evento[0] ?? null; ?>
+        <div class="como-foi<?= $video ? ' com-video' : '' ?>">
+        <?php if ($video): ?>
+            <?php $capa = capa_do_video($video); ?>
+            <div class="video-evento">
+                <video class="js-video-auto" src="<?= $lp ?>/assets/img/evento/<?= rawurlencode($video) ?>"
+                    <?php if ($capa): ?>poster="<?= $lp ?>/assets/img/evento/<?= rawurlencode($capa) ?>"<?php endif; ?>
+                    muted loop playsinline controls preload="none"
+                    aria-label="Vídeo do Simpósio Plantonista Veterinário UFAPE"></video>
             </div>
-            <button type="button" class="seta anterior js-anterior" aria-label="Foto anterior">&lsaquo;</button>
-            <button type="button" class="seta proxima js-proxima" aria-label="Próxima foto">&rsaquo;</button>
+        <?php endif; ?>
+
+        <?php if ($fotos_evento): ?>
+            <div class="carrossel js-carrossel">
+                <div class="trilho js-trilho">
+                    <?php foreach ($fotos_evento as $i => $foto): ?>
+                        <figure class="slide">
+                            <button type="button" class="abrir-foto js-abrir-foto" data-indice="<?= $i ?>" aria-label="Ampliar foto <?= $i + 1 ?>">
+                                <img src="<?= $lp ?>/assets/img/evento/<?= rawurlencode($foto) ?>" alt="Simpósio Plantonista Veterinário UFAPE, foto <?= $i + 1 ?>" loading="lazy">
+                            </button>
+                        </figure>
+                    <?php endforeach; ?>
+                </div>
+                <button type="button" class="seta anterior js-anterior" aria-label="Foto anterior">&lsaquo;</button>
+                <button type="button" class="seta proxima js-proxima" aria-label="Próxima foto">&rsaquo;</button>
+            </div>
+
+            <div class="lightbox js-lightbox" role="dialog" aria-modal="true" aria-label="Foto ampliada" hidden>
+                <img class="js-lb-foto" alt="">
+                <button type="button" class="lb-seta anterior js-lb-anterior" aria-label="Foto anterior">&lsaquo;</button>
+                <button type="button" class="lb-seta proxima js-lb-proxima" aria-label="Próxima foto">&rsaquo;</button>
+                <button type="button" class="lb-fechar js-lb-fechar" aria-label="Fechar">&times;</button>
+                <p class="lb-contador js-lb-contador"></p>
+            </div>
+        <?php endif; ?>
         </div>
     </div>
 </section>
@@ -182,23 +207,9 @@ require __DIR__ . ($no_sistema ? '/includes/header-sistema.php' : '/includes/hea
     </div>
 </section>
 
-<section class="secao" id="faq">
-    <div class="lp-container">
-        <h2 class="titulo-secao">Dúvidas <span>frequentes</span></h2>
-        <div class="faq">
-            <?php foreach ($faq as [$pergunta, $resposta]): ?>
-                <details>
-                    <summary><?= $pergunta ?></summary>
-                    <p class="resposta"><?= $resposta ?></p>
-                </details>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-
 <section class="chamada-final">
     <div class="lp-container">
-        <h2>Vagas presenciais limitadas a 260 pessoas</h2>
+        <h2>Vagas limitadas a 260 pessoas</h2>
         <p>10 e 11 de outubro de 2026, Av. Tiradentes, 960, São Paulo/SP. Transmissão online pela plataforma Vimeo.</p>
         <a class="bt bt-claro" href="#investimento">Fazer minha inscrição</a>
     </div>

@@ -371,6 +371,133 @@ html {
     right: -23px;
 }
 
+/* Com vídeo: ele ocupa o lugar da primeira foto, em pé, e dita a altura da linha;
+   o carrossel ao lado mostra duas fotos esticadas até essa altura. */
+.como-foi.com-video {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 20px;
+}
+
+.video-evento video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    border-radius: 15px;
+    background-color: #000;
+}
+
+/* o trilho sai do fluxo para as fotos não entrarem no cálculo da altura: uma foto
+   em pé, ao carregar, esticava a linha inteira; quem manda na altura é o vídeo */
+.com-video .carrossel .trilho {
+    position: absolute;
+    inset: 0;
+}
+
+.com-video .carrossel .slide {
+    flex-basis: calc((100% - 20px) / 2);
+    height: 100%;
+    aspect-ratio: auto;
+}
+
+/* a seta da esquerda ficaria em cima do vídeo: entra para dentro da foto */
+.com-video .carrossel .anterior {
+    left: 12px;
+}
+
+/* foto do carrossel é um botão que abre a ampliação */
+.carrossel .abrir-foto {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+}
+
+/* Foto ampliada --------------------------------------------------------------- */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 90px;
+    background-color: rgba(0, 0, 0, .92);
+}
+
+.lightbox[hidden] {
+    display: none;
+}
+
+.lightbox img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.lightbox button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.lightbox .lb-seta {
+    top: 50%;
+    width: 52px;
+    height: 52px;
+    padding-bottom: 4px;
+    border-radius: 50%;
+    font-size: 36px;
+    line-height: 1;
+    background-color: rgba(255, 255, 255, .15);
+    transform: translateY(-50%);
+}
+
+.lightbox .lb-seta:hover {
+    background-color: var(--azul);
+}
+
+.lightbox .anterior {
+    left: 20px;
+}
+
+.lightbox .proxima {
+    right: 20px;
+}
+
+.lightbox .lb-fechar {
+    top: 12px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    font-size: 40px;
+    line-height: 1;
+    background: none;
+}
+
+.lightbox .lb-contador {
+    position: absolute;
+    bottom: 18px;
+    left: 0;
+    right: 0;
+    margin: 0;
+    font-size: 14px;
+    text-align: center;
+    color: rgba(255, 255, 255, .75);
+}
+
 /* Para quem é --------------------------------------------------------------- */
 
 .publico-alvo {
@@ -700,63 +827,6 @@ html {
     color: var(--cinza);
 }
 
-/* FAQ ----------------------------------------------------------------------- */
-
-.faq {
-    background-color: #fff;
-    border: 1px solid var(--linha);
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-.faq details {
-    border-bottom: 1px solid var(--linha);
-}
-
-.faq details:last-child {
-    border-bottom: 0;
-}
-
-.faq summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 20px 25px;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--azul-escuro);
-    cursor: pointer;
-    list-style: none;
-}
-
-.faq summary::-webkit-details-marker {
-    display: none;
-}
-
-.faq summary::after {
-    content: '';
-    flex-shrink: 0;
-    width: 26px;
-    height: 26px;
-    background-color: var(--azul);
-    border-radius: 50%;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: .2s;
-}
-
-.faq details[open] summary::after {
-    transform: rotate(180deg);
-}
-
-.faq .resposta {
-    padding: 0 25px 22px 25px;
-    font-size: 15px;
-    color: var(--cinza);
-}
-
 /* Chamada final ------------------------------------------------------------- */
 
 .chamada-final {
@@ -1009,6 +1079,10 @@ html {
         flex-basis: calc((100% - 20px) / 2);
     }
 
+    .como-foi.com-video {
+        grid-template-columns: 200px minmax(0, 1fr);
+    }
+
     .hero .lp-container,
     .publico-alvo,
     .grade-precos {
@@ -1048,8 +1122,43 @@ html {
         flex-basis: 85%;
     }
 
+    /* empilhado: vídeo em cima, carrossel embaixo com as fotos no formato original */
+    .como-foi.com-video {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .video-evento {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .com-video .carrossel .trilho {
+        position: static;
+    }
+
+    .com-video .carrossel .slide {
+        flex-basis: 85%;
+        height: auto;
+        aspect-ratio: 3 / 2;
+    }
+
     .carrossel .seta {
         display: none;
+    }
+
+    /* no celular a foto usa a largura toda e as setas descem para perto do contador */
+    .lightbox {
+        padding: 60px 10px 80px 10px;
+    }
+
+    .lightbox .lb-seta {
+        top: auto;
+        bottom: 10px;
+        width: 44px;
+        height: 44px;
+        font-size: 30px;
+        transform: none;
     }
 
     .lp-container {
@@ -1110,12 +1219,6 @@ html {
 
     .card-preco .preco b {
         font-size: 23px;
-    }
-
-    .faq summary,
-    .faq .resposta {
-        padding-left: 20px;
-        padding-right: 20px;
     }
 
     .popup .caixa {
